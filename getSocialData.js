@@ -3,7 +3,7 @@
 
 var resultObj;
 var login = (provider, callback) => {
-	OAuth.redirect(provider, '/');
+	OAuth.redirect(provider, '/social-data-getter');
 	OAuth.callback(provider, {cache: true}).done((p) => {
 		resultObj = p;
 		callback.run(p);
