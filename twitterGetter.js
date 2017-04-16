@@ -1,24 +1,17 @@
-var twitterAPI = {
-	version: '1.1',
-	url: 'https://api.twitter.com/'
+var resultObj;
+var login = (provider) => {
+	OAuth.popup(provider, {cache: true}).done((p) => {
+		resultObj = p;
+	}).fail((p) => {
+	});
 };
-var xhr = new XMLHttpRequest();
-var getBearerToken = (key, secret, callback) => {
-	var url = twitterAPI.url + 'oauth2/token';
-	var credentials = atob(key + ':' + secret); //bearer token credentials
-	xhr.onreadystatechange = () => {
-		if(this.readyState == 200) callback.run(JSON.parse(this.responseText).access_token);
-	};
-	xhr.open('POST', url, true);
-	xhr.setRequestHeader('Authorization', 'Basic ' + credentials);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-	xhr.send('grant_type=client_credentials');
+var logout = OAuth.clearCache;
+var getData = (resource, params, callback) => {
+	var paramsArray = [];
+	for (var x in params) paramsArray.push(x + '=' + params[x]);
+	var url = resource + '?' + paramsArray.join('&');
+	resultObj.get(url).done(callback.run).fail(callback.error);
 };
-var callAPIMethod = (methodUrl, callback) => {
-	var url = twitterAPI.url + twitterAPI.version + '/' + methodUrl;
-	xhr.onreadystatechange = () => {
-		if(this.readyState == 200) callback.run(JSON.parse(this.responseText));
-	};
-	xhr.open('GET', url, true);
-	xhr.send();
+var initialize = () => {
+	OAuth.initialize('PlcWON5gLeLsM92yfNnUQ7_IsXQ');
 };
