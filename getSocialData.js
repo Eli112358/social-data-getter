@@ -3,7 +3,8 @@
 
 var resultObj;
 var login = (provider, callback) => {
-	OAuth.popup(provider, {cache: true}).done((p) => {
+	OAuth.redirect(provider, '/');
+	OAuth.callback(provider, {cache: true}).done((p) => {
 		resultObj = p;
 		callback.run(p);
 	}).fail((p) => {
