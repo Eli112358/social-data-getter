@@ -1,3 +1,6 @@
+// This project is licensed under the terms of the MIT license.
+// If you did not recieve the included LICENSE file, please goto https://github.com/Eli112358/social-data-getter-js/blob/master/LICENSE.
+
 var resultObj;
 var login = (provider) => {
 	OAuth.popup(provider, {cache: true}).done((p) => {
