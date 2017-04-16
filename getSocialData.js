@@ -2,10 +2,12 @@
 // If you did not recieve the included LICENSE file, please goto https://github.com/Eli112358/social-data-getter-js/blob/master/LICENSE.
 
 var resultObj;
-var login = (provider) => {
+var login = (provider, callback) => {
 	OAuth.popup(provider, {cache: true}).done((p) => {
 		resultObj = p;
+		callback.run(p);
 	}).fail((p) => {
+		callback.error(p);
 	});
 };
 var logout = OAuth.clearCache;
