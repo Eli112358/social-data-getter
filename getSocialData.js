@@ -2,8 +2,10 @@
 // If you did not recieve the included LICENSE file, please goto https://github.com/Eli112358/social-data-getter-js/blob/master/LICENSE.
 
 var resultObj;
-var login = (provider, callback) => {
-	OAuth.redirect(provider, '/social-data-getter');
+var login = (provider) => {
+	OAuth.redirect(provider, '/social-data-getter?provider='+provider);
+}
+var callback = (provider, callback) => {
 	OAuth.callback(provider, {cache: true}).done((p) => {
 		resultObj = p;
 		callback.run(p);
@@ -20,4 +22,7 @@ var getData = (resource, params, callback) => {
 };
 var initialize = () => {
 	OAuth.initialize('PlcWON5gLeLsM92yfNnUQ7_IsXQ');
+	var provider = getURLParameter('provider');
+	var logIt = (p) => {console.log(p)};
+	if(provider != '') callback(provider, {run: logIt, error: logIt});
 };

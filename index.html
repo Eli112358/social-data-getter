@@ -4,9 +4,10 @@
 		<title>Social Data Getter - Testing</title>
 		<script src="oauth.min.js"></script>
 		<script src="getSocialData.js"></script>
+		<script src="../javascripts/getQueryString.js"></script>
 	</head>
 	<body onload="initialize()">
 		<h1>Testing</h1>
-		<button onclick="login('twitter', {run: (p)=>{console.log(p)}, error: (p)=>{console.log(p)}})">Login</button>
+		<button onclick="login('twitter')">Login</button>
 	</body>
 </html>
